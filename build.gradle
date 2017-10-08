@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'house.Main'
+
+jar {
+    baseName = 'house'
+    version =  '1.0'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.2'
+}

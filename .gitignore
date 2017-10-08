@@ -1,0 +1,12 @@
+.gradle
+gradlew.bat
+gradlew
+gradle-wrapper.properties
+/build/
+gradle-wrapper.jar
+.gradletasknamecache
+.idea
+*.iml
+out
+gen
+*.trace.db
