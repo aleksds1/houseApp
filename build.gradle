@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'house.Main'
+mainClassName = 'com.house.Main'
 
 jar {
     baseName = 'house'
