@@ -1,10 +1,14 @@
-package com.house.controller;
+package main.java.com.house.controller;
 
-import com.house.model.*;
+import main.java.com.house.model.*;
+import main.java.com.house.service.Service;
+
 import java.util.ArrayList;
 import java.io.*;
 
 public class Controller {
+
+    public Service service = new Service();
 
     //Задаём метод для сумирования площадей внутри дома и метод выдачи отчёта
     public void makeReport(){

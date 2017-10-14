@@ -1,6 +1,6 @@
-package com.house.service;
+package main.java.com.house.service;
 
-import com.house.model.*;
+import main.java.com.house.model.*;
 import java.util.*;
 import java.io.*;
 public class Service {

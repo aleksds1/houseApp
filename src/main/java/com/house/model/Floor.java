@@ -1,4 +1,4 @@
-package com.house.model;
+package main.java.com.house.model;
 
 import java.util.*;
 public class Floor extends BaseHall {

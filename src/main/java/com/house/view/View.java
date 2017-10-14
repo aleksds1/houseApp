@@ -1,8 +1,8 @@
-package com.house.view;
+package main.java.com.house.view;
 
-import com.house.model.*;
-import com.house.service.Service;
-import com.house.controller.Controller;
+import main.java.com.house.model.*;
+import main.java.com.house.service.Service;
+import main.java.com.house.controller.Controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
@@ -10,7 +10,7 @@ import java.io.*;
 public class View {
 
     //Класс для отрисовки меню
-    Service service = new Service();
+    //Service service = new Service();
     Controller controller = new Controller();
 
 
@@ -45,7 +45,7 @@ public class View {
 
     public void loadAddMenu(){
 
-        System.out.println("\nВведите индекс дома, последний используемый - "+(service.houses.size()-1));
+        System.out.println("\nВведите индекс дома, последний используемый - "+(controller.service.houses.size()-1));
         Scanner in = new Scanner(System.in);
         int index = in.nextInt();
         System.out.println("\nВведите адрес дома");
@@ -123,7 +123,7 @@ public class View {
 
         }
         House house = new House(index,sqHouse,address,entrances);
-        service.houses.add(house);
+        controller.service.houses.add(house);
         loadMainMenu();
 
     }
@@ -133,7 +133,7 @@ public class View {
         System.out.println("\nВведите индекс удаляемого дома");
         Scanner in = new Scanner(System.in);
         int index = in.nextInt();
-        service.removeHouse(index);
+        controller.service.removeHouse(index);
         loadMainMenu();
 
     }
@@ -143,7 +143,7 @@ public class View {
         System.out.println("\nВведите индекс дома, в котором проводятся изменения. В ходе изменения необходимо пересоздать весь дом");
         Scanner in = new Scanner(System.in);
         int index = in.nextInt();
-        service.removeHouse(index);
+        controller.service.removeHouse(index);
         System.out.println("\nВведите адрес дома");
         BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
         String address = null;
@@ -219,7 +219,7 @@ public class View {
 
         }
         House house = new House(index,sqHouse,address,entrances);
-        service.houses.add(house);
+        controller.service.houses.add(house);
 
         /*System.out.println("\nЧто вы хотите изменить?\n1 - Данные о доме\n2 - данные о подъезде\n3 - данные об этаже\n4 - данные о квартире\n5 - данные о комнате\n6 - выйти в главное меню");
         Scanner in = new Scanner(System.in);
@@ -262,10 +262,10 @@ public class View {
 
     public void loadReport(){
 
-        System.out.println("\nНа текущий момент есть: "+service.houses.size()+" домов");
+        System.out.println("\nНа текущий момент есть: "+controller.service.houses.size()+" домов");
         double sum =0;
         //ArrayList<String> addresses = new ArrayList<String>();
-        for (House house:service.houses){
+        for (House house:controller.service.houses){
             sum+=controller.sumH(house);
             //addresses.add(house.getAddress());
             System.out.println("\nАдрес: "+house.getAddress());
