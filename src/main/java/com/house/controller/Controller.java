@@ -1,14 +1,15 @@
 package main.java.com.house.controller;
 
-import main.java.com.house.model.*;
+import main.java.com.house.service.model.*;
+import main.java.com.house.service.ServiceInterface;
 import main.java.com.house.service.Service;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.io.*;
 
-public class Controller {
+public class Controller implements ControllerInterface {
 
-    public Service service = new Service();
+    public ServiceInterface service = new Service();
 
     //Задаём метод для сумирования площадей внутри дома и метод выдачи отчёта
     public void makeReport(){
@@ -17,7 +18,27 @@ public class Controller {
 
     }
 
-    public double sumS(ArrayList<Integer> index,ArrayList<House> houses){
+    public void addHouse(House house)
+    {
+        service.addHouse(house);
+    }
+
+    public void removeHouse(int index)
+    {
+        service.removeHouse(index);
+    }
+
+    public List<House> returnHouses()
+    {
+        return service.returnHouses();
+    }
+
+    public int returnSize()
+    {
+        return service.returnSize();
+    }
+
+    public double sumS(List<Integer> index,List<House> houses){
         double sum =0;
 
         for (int i=0;i<index.size();i++){

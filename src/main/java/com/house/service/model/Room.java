@@ -1,4 +1,4 @@
-package main.java.com.house.model;
+package main.java.com.house.service.model;
 
 public class Room extends BaseHall {
 

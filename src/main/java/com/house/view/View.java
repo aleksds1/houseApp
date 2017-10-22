@@ -1,24 +1,33 @@
 package main.java.com.house.view;
 
-import main.java.com.house.model.*;
+//import main.java.com.house.model.*;
 import main.java.com.house.service.Service;
-import main.java.com.house.controller.Controller;
-import java.util.ArrayList;
-import java.util.Scanner;
+import main.java.com.house.service.model.*;
+import main.java.com.house.controller.*;
+import java.util.*;
+//import java.util.Scanner;
 import java.io.*;
 
-public class View {
+public class View implements ViewInterface{
 
     //Класс для отрисовки меню
     //Service service = new Service();
-    Controller controller = new Controller();
+    ControllerInterface controller = new Controller();
 
 
     public void loadMainMenu(){
 
         System.out.println("\nВведите желаемую команду\n1 - просмотреть информацию о домах\n2 - добавить дом\n3 - изменить дом\n4 - удалить дом\n5 - выход из программы");
-        Scanner in = new Scanner(System.in);
-        int index = in.nextInt();
+        //Scanner in = new Scanner(System.in);
+        BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+        String indexTemp = "1";
+        try {
+            indexTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //System.out.println(Integer.valueOf(indexTemp));
+        int index = Integer.valueOf(indexTemp);
         switch(index){
 
             case 1:
@@ -45,11 +54,18 @@ public class View {
 
     public void loadAddMenu(){
 
-        System.out.println("\nВведите индекс дома, последний используемый - "+(controller.service.houses.size()-1));
+        System.out.println("\nВведите индекс дома, последний используемый - "+(controller.returnSize()-1));
         Scanner in = new Scanner(System.in);
-        int index = in.nextInt();
-        System.out.println("\nВведите адрес дома");
         BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+        String indexTemp="0";
+        try {
+            indexTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int index = Integer.valueOf(indexTemp);
+        System.out.println("\nВведите адрес дома");
+        //BufferedReader br2 = new BufferedReader (new InputStreamReader(System.in));
         String address = null;
         try {
             address = br.readLine();
@@ -57,48 +73,131 @@ public class View {
             e.printStackTrace();
         }
         System.out.println("\nВведите площадь дома");
-        double sqHouse = in.nextDouble();
+        String sqHouseTemp="1.0";
+        try {
+            sqHouseTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        double sqHouse = Double.valueOf(sqHouseTemp);
         System.out.println("\nВведите количество подъездов");
-        int numEntrance = in.nextInt();
+        String numEntranceTemp = "0";
+        try {
+            numEntranceTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int numEntrance = Integer.valueOf(numEntranceTemp);
         System.out.println("\nВведите количество этажей");
-        int numFloor = in.nextInt();
-
-        ArrayList<Entrance> entrances = new ArrayList<Entrance>();
+        String numFloorTemp = "0";
+        try {
+            numFloorTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int numFloor = Integer.valueOf(numFloorTemp);
+        List<Entrance> entrances = new ArrayList<Entrance>();
         for (int i=0;i<numEntrance;i++){
 
             System.out.println("\nВведите индекс подъезда");
-            int indEntrance = in.nextInt();
+            String indEntranceTemp = "0";
+            try {
+                indEntranceTemp = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            int indEntrance = Integer.valueOf(indEntranceTemp);
             System.out.println("\nВведите площадь подъезда");
-            double sqEntrance = in.nextDouble();
-
-            ArrayList<Floor> floors = new ArrayList<Floor>();
+            //double sqEntrance = in.nextDouble();
+            String sqEntranceTemp="1.0";
+            try {
+                sqEntranceTemp = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            double sqEntrance = Double.valueOf(sqEntranceTemp);
+            List<Floor> floors = new ArrayList<Floor>();
             for(int j=0;j<numFloor;j++){
 
                 System.out.println("\nВведите количество квартир на этаже");
-                int numFlat = in.nextInt();
+                String numFlatTemp = "0";
+                try {
+                    numFlatTemp = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                int numFlat = Integer.valueOf(numFlatTemp);
 
                 System.out.println("\nВведите индекс этажа");
-                int indFloor = in.nextInt();
+                String indFloorTemp = "0";
+                try {
+                    indFloorTemp = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                int indFloor = Integer.valueOf(indFloorTemp);
                 System.out.println("\nВведите площадь этажа");
-                double sqFloor = in.nextDouble();
-                ArrayList<Flat> flats = new ArrayList<Flat>();
+                String sqFloorTemp = "1.0";
+                try {
+                    sqFloorTemp = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                double sqFloor = Double.valueOf(sqFloorTemp);
+                List<Flat> flats = new ArrayList<Flat>();
                 for (int k=0;k<numFlat;k++){
 
                     System.out.println("\nВведите индекс квартиры");
-                    int indFlat = in.nextInt();
+                    String indFlatTemp = "0";
+                    try {
+                        indFlatTemp = br.readLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    int indFlat = Integer.valueOf(indFlatTemp);
                     System.out.println("\nВведите номер квартиры");
-                    int number = in.nextInt();
+                    String numberTemp = "0";
+                    try {
+                        numberTemp = br.readLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    int number = Integer.valueOf(numberTemp);
                     System.out.println("\nВведите количество комнат (с коридорами) в квартире");
-                    int numRoom = in.nextInt();
-                    ArrayList<Room> rooms = new ArrayList<Room>();
+                    String numRoomTemp = "0";
+                    try {
+                        numRoomTemp = br.readLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    int numRoom = Integer.valueOf(numRoomTemp);
+                    List<Room> rooms = new ArrayList<Room>();
                     for (int l=0;l<numRoom;l++){
 
                         System.out.println("\nВведите индекс комнаты");
-                        int ind = in.nextInt();
+                        String indTemp = "0";
+                        try {
+                            indTemp = br.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        int ind = Integer.valueOf(indTemp);
                         System.out.println("\nВведите площадь комнаты");
-                        double sqRoom = in.nextDouble();
+                        String sqRoomTemp = "1.0";
+                        try {
+                            sqRoomTemp = br.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        double sqRoom = Double.valueOf(sqRoomTemp);
                         System.out.println("\nВыберите тип комнаты:\n1 - жилая\n2 - нежилая");
-                        int ind2 = in.nextInt();
+                        String ind2Temp = "1";
+                        try {
+                            ind2Temp = br.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        int ind2 = Integer.valueOf(ind2Temp);
                         Room.Type type;
                         if(ind2==1){
                             type =Room.Type.LIVINGROOM;
@@ -123,7 +222,8 @@ public class View {
 
         }
         House house = new House(index,sqHouse,address,entrances);
-        controller.service.houses.add(house);
+        //controller.service.houses.add(house);
+        controller.addHouse(house);
         loadMainMenu();
 
     }
@@ -132,8 +232,15 @@ public class View {
 
         System.out.println("\nВведите индекс удаляемого дома");
         Scanner in = new Scanner(System.in);
-        int index = in.nextInt();
-        controller.service.removeHouse(index);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String indexTemp = "0";
+        try {
+            indexTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int index = Integer.valueOf(indexTemp);
+        controller.removeHouse(index);
         loadMainMenu();
 
     }
@@ -142,10 +249,17 @@ public class View {
 
         System.out.println("\nВведите индекс дома, в котором проводятся изменения. В ходе изменения необходимо пересоздать весь дом");
         Scanner in = new Scanner(System.in);
-        int index = in.nextInt();
-        controller.service.removeHouse(index);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String indexTemp = "0";
+        try {
+            indexTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int index = Integer.valueOf(indexTemp);
+        controller.removeHouse(index);
         System.out.println("\nВведите адрес дома");
-        BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+        //BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
         String address = null;
         try {
             address = br.readLine();
@@ -153,48 +267,132 @@ public class View {
             e.printStackTrace();
         }
         System.out.println("\nВведите площадь дома");
-        double sqHouse = in.nextDouble();
+        String sqHouseTemp = "1.0";
+        try {
+            sqHouseTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        double sqHouse = Double.valueOf(sqHouseTemp);
         System.out.println("\nВведите количество подъездов");
-        int numEntrance = in.nextInt();
+        String numEntranceTemp = "0";
+        try {
+            numEntranceTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int numEntrance = Integer.valueOf(numEntranceTemp);
         System.out.println("\nВведите количество этажей");
-        int numFloor = in.nextInt();
+        String numFloorTemp = "0";
+        try {
+            numFloorTemp = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int numFloor = Integer.valueOf(numFloorTemp);
 
-        ArrayList<Entrance> entrances = new ArrayList<Entrance>();
+        List<Entrance> entrances = new ArrayList<Entrance>();
         for (int i=0;i<numEntrance;i++){
 
             System.out.println("\nВведите индекс подъезда");
-            int indEntrance = in.nextInt();
+            String indEntranceTemp = "0";
+            try {
+                indEntranceTemp = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            int indEntrance = Integer.valueOf(indEntranceTemp);
             System.out.println("\nВведите площадь подъезда");
-            double sqEntrance = in.nextDouble();
+            String sqEntranceTemp = "1.0";
+            try {
+                sqEntranceTemp = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            double sqEntrance = Double.valueOf(sqEntranceTemp);
 
-            ArrayList<Floor> floors = new ArrayList<Floor>();
+            List<Floor> floors = new ArrayList<Floor>();
             for(int j=0;j<numFloor;j++){
 
                 System.out.println("\nВведите количество квартир на этаже");
-                int numFlat = in.nextInt();
+                String numFlatTemp = "0";
+                try {
+                    numFlatTemp = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                int numFlat = Integer.valueOf(numFlatTemp);
 
                 System.out.println("\nВведите индекс этажа");
-                int indFloor = in.nextInt();
+                String indFloorTemp = "0";
+                try {
+                    indFloorTemp = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                int indFloor = Integer.valueOf(indFloorTemp);
                 System.out.println("\nВведите площадь этажа");
-                double sqFloor = in.nextDouble();
-                ArrayList<Flat> flats = new ArrayList<Flat>();
+                String sqFloorTemp = "1.0";
+                try {
+                    sqFloorTemp = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                double sqFloor = Double.valueOf(sqFloorTemp);
+                List<Flat> flats = new ArrayList<Flat>();
                 for (int k=0;k<numFlat;k++){
 
                     System.out.println("\nВведите индекс квартиры");
-                    int indFlat = in.nextInt();
+                    String indFlatTemp = "0";
+                    try {
+                        indFlatTemp = br.readLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    int indFlat = Integer.valueOf(indFlatTemp);
                     System.out.println("\nВведите номер квартиры");
-                    int number = in.nextInt();
+                    String numberTemp = "0";
+                    try {
+                        numberTemp = br.readLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    int number = Integer.valueOf(numberTemp);
                     System.out.println("\nВведите количество комнат (с коридорами) в квартире");
-                    int numRoom = in.nextInt();
-                    ArrayList<Room> rooms = new ArrayList<Room>();
+                    String numRoomTemp = "0";
+                    try {
+                        numRoomTemp = br.readLine();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    int numRoom = Integer.valueOf(numRoomTemp);
+                    List<Room> rooms = new ArrayList<Room>();
                     for (int l=0;l<numRoom;l++){
 
                         System.out.println("\nВведите индекс комнаты");
-                        int ind = in.nextInt();
+                        String indTemp = "0";
+                        try {
+                            indTemp = br.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        int ind = Integer.valueOf(indTemp);
                         System.out.println("\nВведите площадь комнаты");
-                        double sqRoom = in.nextDouble();
+                        String sqRoomTemp = "1.0";
+                        try {
+                            sqRoomTemp = br.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        double sqRoom = Double.valueOf(sqRoomTemp);
                         System.out.println("\nВыберите тип комнаты:\n1 - жилая\n2 - нежилая");
-                        int ind2 = in.nextInt();
+                        String ind2Temp = "1";
+                        try {
+                            ind2Temp = br.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        int ind2 = Integer.valueOf(ind2Temp);
                         Room.Type type;
                         if(ind2==1){
                             type =Room.Type.LIVINGROOM;
@@ -219,7 +417,7 @@ public class View {
 
         }
         House house = new House(index,sqHouse,address,entrances);
-        controller.service.houses.add(house);
+        controller.addHouse(house);
 
         /*System.out.println("\nЧто вы хотите изменить?\n1 - Данные о доме\n2 - данные о подъезде\n3 - данные об этаже\n4 - данные о квартире\n5 - данные о комнате\n6 - выйти в главное меню");
         Scanner in = new Scanner(System.in);
@@ -262,10 +460,11 @@ public class View {
 
     public void loadReport(){
 
-        System.out.println("\nНа текущий момент есть: "+controller.service.houses.size()+" домов");
+        System.out.println("\nНа текущий момент есть: "+controller.returnSize()+" домов");
         double sum =0;
         //ArrayList<String> addresses = new ArrayList<String>();
-        for (House house:controller.service.houses){
+        List<House> allHouses = controller.returnHouses();
+        for (House house:allHouses){
             sum+=controller.sumH(house);
             //addresses.add(house.getAddress());
             System.out.println("\nАдрес: "+house.getAddress());
